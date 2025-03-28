@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="ClockSwing:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ClockSwing_jar</output-path>
+    <root id="archive" name="ClockSwing.jar">
+      <element id="module-output" name="ClockSwing" />
+    </root>
+  </artifact>
+</component>
