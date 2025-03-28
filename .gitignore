@@ -1,3 +1,3 @@
-/Aulas/ClockSwing/nbproject/private/
-/Aulas/ClockSwing/build/
-/Aulas/ClockSwing/dist/
+**/build
+**/dist
+*.class
