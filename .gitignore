@@ -1,4 +1,4 @@
 **/build
 **/dist
 *.class
-/Exercicios/SumSwing/nbproject/private/
+**/build.xml
