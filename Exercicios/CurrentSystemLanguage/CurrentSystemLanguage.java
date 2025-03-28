@@ -1,4 +1,4 @@
-package currentsystemlanguage;
+package Exercicios.CurrentSystemLanguage;
 
 import java.util.Locale;
 
