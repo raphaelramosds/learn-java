@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'Open Sans';
+	src : url('fonts/OpenSans-Regular.ttf');
+}
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	color: #66bbff;
+}
+
+.btn {
+	text-decoration: none;
+	background-color: #66bbff;
+	padding: 5px 10px 5px 10px;
+	color: #fff;
+	font-size: 1.2em;
+	font-weight: 700;
+	border-radius: 5px;
+	border: 0;
+	cursor: pointer;
+}
