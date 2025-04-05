@@ -1,6 +1,9 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,7 +40,9 @@ public class Controller extends HttpServlet {
 		
 		switch (action) {
 			case "/index":
-				response.sendRedirect("contacts-list.jsp");
+				request.setAttribute("contacts", dao.findAll());
+				RequestDispatcher rd = request.getRequestDispatcher("contacts-list.jsp");
+				rd.forward(request, response);
 				break;
 			case "/save":
 				JavaBeans contact = new JavaBeans();

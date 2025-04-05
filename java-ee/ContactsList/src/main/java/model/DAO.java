@@ -3,6 +3,8 @@ package model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 /**
  * Data connection module implemented with DAO pattern
@@ -55,11 +57,40 @@ public class DAO {
 			PreparedStatement pst = conn.prepareStatement(sql);
 			pst.setString(1, contact.getName()); // Set property name on the first question mark
 			pst.setString(2, contact.getPhone()); // Set property phone on the second question mark
-			pst.setString(3, contact.getEmail()); // Set property phone on the second question mark
+			pst.setString(3, contact.getEmail()); // Set property phone on the third question mark
 			pst.executeUpdate();
 			conn.close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
+	
+	public ArrayList<JavaBeans> findAll() {
+		ArrayList<JavaBeans> contacts = new ArrayList<>();
+		String sql= "SELECT * FROM contacts ORDER BY name";
+		try {
+			Connection conn = connect();
+			PreparedStatement pst = conn.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery();
+			
+			while (rs.next()) {
+				// Assign each property accordingly to its position on the contacts table
+				String id = rs.getString(1);
+				String name = rs.getString(2);
+				String phone = rs.getString(3);
+				String email = rs.getString(4);
+				
+				// Add to the list
+				contacts.add(new JavaBeans(id, name, phone, email));
+				
+				// Go to next row of the query with next()
+			}
+			conn.close();
+			return contacts;
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
+	}
+	
 }
