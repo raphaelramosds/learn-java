@@ -2,3 +2,7 @@
 **/dist
 **/build.xml
 *.class
+/Exercicios/FactorialSwing/nbproject/private/
+/Exercicios/StatisticsSwing/nbproject/private/
+/Exercicios/Statistics/nbproject/private/
+/Exercicios/FactorialV2Swing/nbproject/private/
