@@ -32,10 +32,16 @@
 				<td><%=contact.getName()%></td>
 				<td><%=contact.getPhone()%></td>
 				<td><%=contact.getEmail()%></td>
-				<td><a href="edit?id=<%=contact.getId()%>" class="btn">Editar</a></td>
+				<td>
+					<a href="edit?id=<%=contact.getId()%>" class="btn btn-info">Editar</a>
+					<a href="javascript: void(0)" class="btn btn-danger btn-remove-contact" data-id="<%=contact.getId()%>">Excluir</a>
+				</td>
 			</tr>
 			<%} %>
 		</tbody>
 	</table>
+
+	<script type="text/javascript" src="scripts/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript" src="scripts/confirm.js"></script>
 </body>
 </html>

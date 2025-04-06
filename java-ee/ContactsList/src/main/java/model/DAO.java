@@ -89,6 +89,23 @@ public class DAO {
 	}
 
 	/**
+	 * Delete a contact
+	 * @param contact
+	 */
+	public void delete(JavaBeans contact) {
+		String sql = "DELETE FROM contacts WHERE id = ?";
+		try {
+			Connection conn = connect();
+			PreparedStatement pst = conn.prepareStatement(sql);
+			pst.setInt(1, Integer.parseInt(contact.getId()));
+			pst.executeUpdate();
+			conn.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+
+	/**
 	 * Find a contact by this primary key
 	 * @param contact
 	 */

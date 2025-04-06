@@ -16,11 +16,12 @@ import model.JavaBeans;
  * Servlet implementation class Controller
  */
 @WebServlet(urlPatterns = {
-	"/Controller", 
+	"/Controller",
 	"/index", 
 	"/save",
 	"/edit",
-	"/update"
+	"/update",
+	"/delete"
 })
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -60,7 +61,7 @@ public class Controller extends HttpServlet {
 				contact = new JavaBeans();
 				contact.setId(request.getParameter("id"));
 
-				// Fill this contact data
+				// Find this contact
 				dao.findOne(contact);
 
 				// Dispatch (send) this object to JSP
@@ -81,6 +82,13 @@ public class Controller extends HttpServlet {
 				dao.update(contact);
 
 				// Return to contacts list
+				response.sendRedirect("index");
+				break;
+
+			case "/delete":
+				contact = new JavaBeans();
+				contact.setId(request.getParameter("id"));
+				dao.delete(contact);
 				response.sendRedirect("index");
 				break;
 
