@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	// Casting to ArrayList<JavaBeans>
+	// Cast request attribute to ArrayList<JavaBeans>
 	ArrayList<JavaBeans> contacts = (ArrayList<JavaBeans>) request.getAttribute("contacts");
 %>
 <!DOCTYPE html>
@@ -22,7 +22,8 @@
 			<tr>
 				<th>Nome</th>
 				<th>Phone</th>
-				<th>Email</th>			
+				<th>Email</th>
+				<th>Ação</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -31,6 +32,7 @@
 				<td><%=contact.getName()%></td>
 				<td><%=contact.getPhone()%></td>
 				<td><%=contact.getEmail()%></td>
+				<td><a href="edit?id=<%=contact.getId()%>" class="btn">Editar</a></td>
 			</tr>
 			<%} %>
 		</tbody>

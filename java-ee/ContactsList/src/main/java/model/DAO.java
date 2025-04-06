@@ -48,8 +48,11 @@ public class DAO {
 			System.out.println(e);
 		}
 	}
-	
 
+	/**
+	 * Save contact on database
+	 * @param contact
+	 */
 	public void save(JavaBeans contact) {
 		String sql = "INSERT INTO contacts (name, phone, email) VALUES (?,?,?)";
 		try {
@@ -64,7 +67,56 @@ public class DAO {
 			System.out.println(e);
 		}
 	}
-	
+
+	/**
+	 * Update a contact
+	 * @param contact
+	 */
+	public void update(JavaBeans contact) {
+		String sql = "UPDATE contacts SET name = ?, phone = ?, email = ? WHERE id = ?";
+		try {
+			Connection conn = connect();
+			PreparedStatement pst = conn.prepareStatement(sql);
+			pst.setString(1, contact.getName());
+			pst.setString(2, contact.getPhone());
+			pst.setString(3, contact.getEmail());
+			pst.setInt(4, Integer.parseInt(contact.getId()));
+			pst.executeUpdate();
+			conn.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+
+	/**
+	 * Find a contact by this primary key
+	 * @param contact
+	 */
+	public void findOne(JavaBeans contact) {
+		String sql = "SELECT * FROM contacts WHERE id = (?) LIMIT 1";
+		try {
+			Connection conn = connect();
+			PreparedStatement pst = conn.prepareStatement(sql);
+			pst.setInt(1, Integer.parseInt(contact.getId()));
+			ResultSet rs = pst.executeQuery();
+
+			// Fill attributes by reference
+			while (rs.next()) {
+				contact.setName(rs.getString("name"));
+				contact.setPhone(rs.getString("phone"));
+				contact.setEmail(rs.getString("email"));
+			}
+
+			conn.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+
+	/**
+	 * List all contacts
+	 * @return
+	 */
 	public ArrayList<JavaBeans> findAll() {
 		ArrayList<JavaBeans> contacts = new ArrayList<>();
 		String sql= "SELECT * FROM contacts ORDER BY name";
@@ -72,7 +124,7 @@ public class DAO {
 			Connection conn = connect();
 			PreparedStatement pst = conn.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
-			
+
 			while (rs.next()) {
 				// Assign each property accordingly to its position on the contacts table
 				String id = rs.getString(1);
@@ -85,6 +137,7 @@ public class DAO {
 				
 				// Go to next row of the query with next()
 			}
+
 			conn.close();
 			return contacts;
 		} catch (Exception e) {
