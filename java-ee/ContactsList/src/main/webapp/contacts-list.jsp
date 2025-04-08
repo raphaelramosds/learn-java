@@ -4,6 +4,7 @@
     pageEncoding="UTF-8"%>
 <%
 	// Cast request attribute to ArrayList<JavaBeans>
+	@ SuppressWarnings("unchecked")
 	ArrayList<JavaBeans> contacts = (ArrayList<JavaBeans>) request.getAttribute("contacts");
 %>
 <!DOCTYPE html>
