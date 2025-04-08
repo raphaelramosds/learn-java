@@ -1,14 +1,21 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import model.DAO;
 import model.JavaBeans;
 
@@ -21,7 +28,8 @@ import model.JavaBeans;
 	"/save",
 	"/edit",
 	"/update",
-	"/delete"
+	"/delete",
+	"/report"
 })
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -90,6 +98,52 @@ public class Controller extends HttpServlet {
 				contact.setId(request.getParameter("id"));
 				dao.delete(contact);
 				response.sendRedirect("index");
+				break;
+
+			case "/report":
+				Document doc = new Document();
+				try {
+					// Prepare response
+					response.setContentType("application/pdf");
+					response.setHeader("Content-Disposition", "attachment; filename=contacts.pdf");
+					response.setHeader("Content-Transfer-Encoding", "binary");
+
+					// Mount document
+					PdfWriter.getInstance(doc, response.getOutputStream());
+					doc.open();
+
+					// Title
+					doc.add(new Paragraph("Contacts list: "));
+					doc.add(new Paragraph(" "));
+
+					// Table
+					PdfPTable table = new PdfPTable(3);
+					table.setWidthPercentage(100);
+					table.setSpacingBefore(10);
+					table.setSpacingAfter(10);
+
+					// Add cols
+					PdfPCell name = new PdfPCell(new Paragraph("Nome"));
+					PdfPCell phone = new PdfPCell(new Paragraph("Telefone"));
+					PdfPCell email = new PdfPCell(new Paragraph("E-mail"));
+					table.addCell(name);
+					table.addCell(phone);
+					table.addCell(email);
+
+					// Add with contacts data
+					ArrayList<JavaBeans> contacts = dao.findAll();
+					for (JavaBeans c : contacts) {
+						table.addCell(new PdfPCell(new Paragraph(c.getName())));
+						table.addCell(new PdfPCell(new Paragraph(c.getPhone())));
+						table.addCell(new PdfPCell(new Paragraph(c.getEmail())));
+					}
+
+					doc.add(table);
+					doc.close();
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					doc.close();
+				}
 				break;
 
 			default:

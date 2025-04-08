@@ -16,7 +16,8 @@
 </head>
 <body>
 	<h1>Contacts List</h1>
-	<a href="contacts-form.html" class="btn">New contact</a>
+	<a href="contacts-form.html" class="btn btn-info">New contact</a>
+	<a href="report" class="btn btn-danger">Exportar</a>
 	<table class="table">
 		<thead>
 			<tr>
