@@ -1,3 +1,8 @@
+/**
+ * Ask user to confirm the action delete
+ * @author rapha
+ */
+
 $(function () {
 
     $(".btn-remove-contact").on('click', function (e) {
