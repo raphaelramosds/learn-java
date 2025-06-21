@@ -19,4 +19,6 @@ public class Carro {
     private String nome;
     private String marca;
     private String modelo;
+    private int ano;
+    private boolean deletado;
 }
