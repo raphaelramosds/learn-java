@@ -21,6 +21,6 @@ public class CarroService {
 
     public Carro findById(Long id) {
         Optional<Carro> carro = this.carroRepository.findById(id);
-        return carro.get();
+        return carro.orElse(null);
     }
 }

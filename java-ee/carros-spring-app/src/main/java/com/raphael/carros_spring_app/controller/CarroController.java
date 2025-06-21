@@ -23,7 +23,7 @@ public class CarroController {
     public ResponseEntity<String> save(@RequestBody Carro carro) {
         try {
             String mensagem = this.carroService.save(carro);
-            return new ResponseEntity<String>(mensagem, HttpStatus.OK);
+            return new ResponseEntity<>(mensagem, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Deu algo errado ao salvar!", HttpStatus.BAD_REQUEST);
         }
@@ -33,7 +33,7 @@ public class CarroController {
     public ResponseEntity<Carro> findById(@PathVariable("id") Long id) {
         try {
             Carro carro = this.carroService.findById(id);
-            return new ResponseEntity<Carro>(carro, HttpStatus.OK);
+            return new ResponseEntity<>(carro, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
