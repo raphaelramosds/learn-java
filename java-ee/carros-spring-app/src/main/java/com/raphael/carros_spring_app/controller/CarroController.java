@@ -30,7 +30,7 @@ public class CarroController {
     }
 
     @GetMapping("findById/{id}")
-    public ResponseEntity<Carro> findById(@PathVariable int id) {
+    public ResponseEntity<Carro> findById(@PathVariable("id") Long id) {
         try {
             Carro carro = this.carroService.findById(id);
             return new ResponseEntity<Carro>(carro, HttpStatus.OK);
