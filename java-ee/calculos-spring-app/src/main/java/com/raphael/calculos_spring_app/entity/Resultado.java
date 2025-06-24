@@ -7,7 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Resultado {
-    private Integer soma;
-    private Double media;
+public class Resultado<T> {
+    private T resultado;
 }
