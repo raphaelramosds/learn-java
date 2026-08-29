@@ -1,5 +1,15 @@
 # First Spring APP
 
+## Test it
+
+```bash
+curl http://localhost:8084/hello-world
+
+curl -X POST http://localhost:8084/hello-world -H "Content-Type: application/json" -d '{"name":"Raphael"}'
+
+curl -X POST http://localhost:8084/hello-world/123 -H "Content-Type: application/json" -d '{"name":"Raphael"}'
+```
+
 ## Vscode
 
 Install extensions
