@@ -1,0 +1,193 @@
+openapi: 3.0.3
+info:
+  title: Carros Spring App API
+  description: API for managing "Carros" (cars), their "Marca" (brand) and "Proprietarios" (owners).
+  version: "1.0.0"
+servers:
+  - url: http://localhost:8080
+    description: Local server
+tags:
+  - name: Carro
+    description: Operations related to Carros
+paths:
+  /api/carro/save:
+    post:
+      tags:
+        - Carro
+      summary: Save a new Carro
+      operationId: saveCarro
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Carro'
+      responses:
+        '201':
+          description: Carro saved successfully
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Error while saving the Carro
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Deu algo errado ao salvar!
+  /api/carro/update/{id}:
+    patch:
+      tags:
+        - Carro
+      summary: Update an existing Carro
+      operationId: updateCarro
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the Carro to update
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Carro'
+      responses:
+        '201':
+          description: Carro updated successfully
+        '400':
+          description: Error while updating the Carro
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Deu algo errado ao atualizar!
+  /api/carro/delete/{id}:
+    delete:
+      tags:
+        - Carro
+      summary: Delete a Carro by ID
+      operationId: deleteCarro
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the Carro to delete
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Carro deleted successfully
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Error while deleting the Carro
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Deu algo errado ao remover!
+  /api/carro/findAll:
+    get:
+      tags:
+        - Carro
+      summary: List all Carros
+      operationId: findAllCarros
+      responses:
+        '200':
+          description: List of Carros
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Carro'
+        '400':
+          description: Error while listing Carros
+  /api/carro/findById/{id}:
+    get:
+      tags:
+        - Carro
+      summary: Find a Carro by ID
+      operationId: findCarroById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the Carro to retrieve
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Carro found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Carro'
+        '400':
+          description: Error while retrieving the Carro
+components:
+  schemas:
+    Carro:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+        nome:
+          type: string
+        marca:
+          $ref: '#/components/schemas/Marca'
+        modelo:
+          type: string
+        ano:
+          type: integer
+          format: int32
+        deletado:
+          type: boolean
+        proprietarios:
+          type: array
+          items:
+            $ref: '#/components/schemas/Proprietario'
+      example:
+        nome: Tracker
+        marca:
+          nome: Chevrolet
+        modelo: SUV
+        ano: 2023
+        deletado: false
+        proprietarios:
+          - nome: Raphael
+            idade: 24
+          - nome: Neto Ramos
+            idade: 55
+    Marca:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+        nome:
+          type: string
+    Proprietario:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+        nome:
+          type: string
+        idade:
+          type: integer
+          format: int32
