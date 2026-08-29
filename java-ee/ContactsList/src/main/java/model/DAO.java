@@ -15,9 +15,9 @@ import java.util.ArrayList;
 public class DAO {
 	// Connection parameters
 	private String driver = "org.postgresql.Driver";
-	private String url = "jdbc:postgresql://0.0.0.0:5433/postgres";
-	private String user = "postgres";
-	private String password = "root";
+	private String url = "jdbc:postgresql://0.0.0.0:5432/postgres";
+	private String user = "eclipse";
+	private String password = "eclipse";
 	
 	/**
 	 * Connection method
@@ -159,8 +159,12 @@ public class DAO {
 			return contacts;
 		} catch (Exception e) {
 			System.out.println(e);
-			return null;
+			return contacts;
 		}
 	}
 	
+	protected ArrayList<JavaBeans> queryAll(ArrayList<JavaBeans> contacts) {
+		// TODO: encapsulate SELECT statement
+		return contacts;
+	}
 }
