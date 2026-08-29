@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Profile;
 public class FirstSpringAppApplication {
 
 	public static void main(String[] args) {
+		// Spring application starting point
 		SpringApplication.run(FirstSpringAppApplication.class, args);
 	}
 
