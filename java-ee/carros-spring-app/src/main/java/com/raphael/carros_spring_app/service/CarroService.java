@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.raphael.carros_spring_app.entity.Carro;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +33,15 @@ public class CarroService {
         carro.setDeletado(true);
         this.carroRepository.save(carro);
         return "Carro deletado com sucesso";
+    }
+    
+    public String deleteMany(ArrayList<Long> ids) {
+    	ArrayList<Carro> carros = (ArrayList<Carro>) this.carroRepository.findAllById(ids);
+    	for (Carro carro: carros) {
+    		carro.setDeletado(true);
+    		this.carroRepository.save(carro);
+    	}
+    	return "IDs deletados com sucesso";
     }
 
     public List<Carro> findAll() {
