@@ -35,6 +35,8 @@ public class CarroController {
             return new ResponseEntity<>("Deu algo errado ao atualizar!", HttpStatus.BAD_REQUEST);
         }
     }
+    
+    // TODO: implement entrypoint for deleteMany
 
     @DeleteMapping("delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id) {
